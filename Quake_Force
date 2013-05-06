@@ -1,0 +1,9 @@
+class Earthquake {
+  
+  float earthquakeMagnitude;
+  float earthquakeDepth;
+  
+  Earthquake() {
+  
+  }
+}

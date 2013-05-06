@@ -1,0 +1,10 @@
+float windDirection;
+float windVelocity;
+float velIncrement = 0.09;
+float velOff = 0;
+void updateWind(){
+  velOff+= velIncrement;
+  windDirection = (random(-5,-1)*.001+TWO_PI)%TWO_PI;
+  // pushes the wind left (negative) or right (positive)
+  windVelocity = 2*noise(velOff)-1;
+}

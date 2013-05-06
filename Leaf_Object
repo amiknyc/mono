@@ -1,0 +1,29 @@
+int nLeafPoints = 5;
+float[] xOutline;
+float[] yOutline;
+void defineLeafOutline(){
+  xOutline = new float[nLeafPoints];
+  yOutline = new float[nLeafPoints];
+  for(int i=0; i<=nLeafPoints/2;i++){
+    xOutline[i] = 2*i/(float)(nLeafPoints);
+    yOutline[i] = (-pow((xOutline[i]-.5),2)+.25)*2;
+    
+    if(i>0 && i<=nLeafPoints/2){
+      xOutline[nLeafPoints-i] = xOutline[i];
+      yOutline[nLeafPoints-i] = -yOutline[i];
+    }
+  }
+}
+
+float tempx;
+float tempy;
+//leafWidth is a fraction of leafLength
+void drawLeaf(float x, float y, float leafLength, float leafWidth, float direction){
+  beginShape();
+  for(int i=0; i<xOutline.length;i++){
+    tempx = xOutline[i]*cos(direction)*leafLength-yOutline[i]*sin(direction)*leafWidth*leafLength;
+    tempy = xOutline[i]*sin(direction)*leafLength+yOutline[i]*cos(direction)*leafWidth*leafLength;
+    vertex(x+tempx,y+tempy);
+  }
+  endShape(CLOSE);
+}

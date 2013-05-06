@@ -1,0 +1,129 @@
+//void mouseClicked(){
+//  generateBranches();
+//  windDirection = random(TWO_PI);
+//  redrawTrees();
+//}
+
+void keyTyped() {
+  if (key == 'm') {
+    drawWind = !drawWind;
+    println(drawWind);
+  }
+
+  if (key == 'p') {
+    pauseWind = !pauseWind;
+    if (pauseWind)
+      windVelocity = 0;
+  }
+
+//more/less wiggly
+if (key=='q') {
+  if (maxdThetaWander==0)
+    maxdThetaWander = .01;
+  maxdThetaWander = maxdThetaWander*1.2;
+  generateBranches();
+}
+
+if (key=='a') {
+  maxdThetaWander = maxdThetaWander/1.2;
+  generateBranches();
+}
+
+//more/less branches
+if (key=='w') {
+  if (branchSpawnOdds<1)
+    branchSpawnOdds += .1;
+  generateBranches();
+}
+
+if (key=='s') {
+  if (branchSpawnOdds>0)
+    branchSpawnOdds -= .1;
+  generateBranches();
+}
+
+
+//fatter/thinner branches
+if (key=='e') {
+  maxBranchThickness = maxBranchThickness*1.2;
+  maxBranchSizeForLeaves = maxBranchSizeForLeaves*1.2;
+  minBranchThickness = minBranchThickness*1.2;
+  generateBranches();
+}
+if (key=='d') {
+  maxBranchThickness = maxBranchThickness/1.2;
+  maxBranchSizeForLeaves = maxBranchSizeForLeaves/1.2;
+  minBranchThickness = minBranchThickness/1.2;
+  generateBranches();
+}
+
+//more/less leaves
+if (key=='r') {
+  if (leafSpawnOdds<1)
+    leafSpawnOdds += .1;
+  generateBranches();
+}
+if (key=='f') {
+  if (leafSpawnOdds>0)
+    leafSpawnOdds -= .1;
+  generateBranches();
+}
+
+//bigger/smaller leaves
+if (key=='t') {
+  minLength = minLength*1.2; //leaf length
+  maxLength = maxLength*1.2; //leaf length
+  generateBranches();
+}
+if (key=='g') {
+  minLength = minLength/1.2; //leaf length
+  maxLength = maxLength/1.2; //leaf length
+  generateBranches();
+}
+
+if (key =='[') {
+  if (nLeafPoints > 6) {
+    nLeafPoints-=2;
+    defineLeafOutline();
+    println("nLeafPoints: "+nLeafPoints);
+  }
+}
+if (key ==']') {
+  nLeafPoints+=2;
+  defineLeafOutline();
+  println("nLeafPoints: "+nLeafPoints);
+}
+
+//reset
+if (key =='1')//natural-ish tree. looks healthy!
+initializeTreeValues();
+
+if (key =='2') {
+  pauseWind = false;
+  drawWind = false;
+  blackLeaves = false;
+  drawLeaves = true;
+
+  //branch
+  nSegments = 15;
+  totalBranchLength = 400;
+  maxBranchThickness = 10;
+  maxBranchSizeForLeaves = 4;
+  minBranchThickness = 2;
+  minSpawnDistance = .1;
+  branchSpawnOdds = .3; 
+  branchSpawnOddsOfSecond = 0;
+  mindThetaSplit = 0;
+  maxdThetaSplit = PI/4;
+  maxdThetaWander = PI/4;
+  dBranchSize = .2;
+  //leaves
+  minLength = 10;
+  maxLength = 30;
+  minWidth = .4;
+  maxWidth = .5;
+  leafSpawnOdds = .7;
+  generateBranches();
+}
+redrawTrees();
+}
